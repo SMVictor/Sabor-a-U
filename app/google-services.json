@@ -1,0 +1,104 @@
+{
+  "project_info": {
+    "project_number": "848893801760",
+    "firebase_url": "https://pedi-tu-almuerzo-c34ef.firebaseio.com",
+    "project_id": "pedi-tu-almuerzo-c34ef",
+    "storage_bucket": "pedi-tu-almuerzo-c34ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848893801760:android:53976342d9376a74",
+        "android_client_info": {
+          "package_name": "com.peditualmuerzo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848893801760-48872q6g8em4f61vio13o62pomuhsooh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMpWm9zKmLY819gOzuhf4sJ29WikR0bHg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848893801760:android:c913266f9d58a1f1",
+        "android_client_info": {
+          "package_name": "com.example.tony.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848893801760-48872q6g8em4f61vio13o62pomuhsooh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMpWm9zKmLY819gOzuhf4sJ29WikR0bHg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848893801760:android:9fe4cb8ed9ba0171",
+        "android_client_info": {
+          "package_name": "com.soda.proyecto.saborau"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848893801760-48872q6g8em4f61vio13o62pomuhsooh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMpWm9zKmLY819gOzuhf4sJ29WikR0bHg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
