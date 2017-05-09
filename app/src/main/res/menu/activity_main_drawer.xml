@@ -1,35 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
+    <item
+    android:id="@+id/home"
+    android:title="@string/btnHome" />
 
-    <item android:title="Communicate">
+    <item
+        android:id="@+id/hitorial"
+        android:title="@string/btnHistorial" />
+
+    <item android:title="Tiempos de Comida">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/desayunos"
+                android:title="@string/btnDesayunos" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/almuerzo"
+                android:title="@string/btnAlmuerzos" />
+
+            <item
+                android:id="@+id/cena"
+                android:title="@string/btnACenas" />
+
+        </menu>
+    </item>
+
+    <item android:title="Sesión de usuario">
+        <menu>
+            <item
+                android:id="@+id/iniciarSesion"
+                android:title="@string/btnIniciarSesion" />
+            <item
+                android:id="@+id/cerrarSesion"
+                android:title="@string/btnCerrarSesion" />
+
+            <item
+                android:id="@+id/registro"
+                android:title="@string/btnRegistro" />
+
+            <item
+                android:id="@+id/recuperar"
+                android:title="@string/btnRecuperarContrasena" />
+
         </menu>
     </item>
 

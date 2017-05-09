@@ -5,4 +5,37 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    //Textos de la pagina de seleccion
+    <string name="btnAlmuerzos">Almuerzos</string>
+    <string name="btnDesayunos">Desayunos</string>
+    <string name="btnACenas">Cenas</string>
+    <string name="btnIniciarSesion">Iniciar Sesión</string>
+    <string name="btnCerrarSesion">Cerrar Sesión</string>
+    <string name="btnRegistro">Crear una cuenta</string>
+    <string name="btnRecuperarContrasena">¿Olvidó su contraseña?</string>
+    <string name="btnHome">Principal</string>
+    <string name="lbInicio">¿Aún no sabes que comer?</string>
+
+    <string name="title_activity_solicitar_servicio_alimentacion">Sabor a U</string>
+
+    <string name="textoPlatoDia">Plato del día</string>
+    <string name="textoPlatoOpcional">Plato opcional</string>
+
+    <string name="title_activity_solicitar_servicio_plato_dia">Sabor a U</string>
+
+    <string name="textoObservaciones">Observaciones: </string>
+    <string name="textoCantidad">Cantidad: </string>
+
+    <string name="textoBtnSolicitud">Solicitar</string>
+    <string name="title_activity_historial">Sabor a U</string>
+    <string name="btnHistorial">Historial de Pedidos</string>
+    <string name="title_activity_detalles_pedido">Sabor a U</string>
+    <string name="informacionDetallesPedido">Información de los platillos incluidos:</string>
+    <string name="detallesPedido">Detalles del pedido:</string>
+    <string name="btnCancelarPedido">Cancelar Pedido</string>
+    <string name="btnModificarPedido">Modificar Pedido</string>
+    <string name="title_activity_modificar_pedido">Sabor a U</string>
+    <string name="textoBtnModificar">Modificar</string>
+
 </resources>
