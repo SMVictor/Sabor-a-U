@@ -1,0 +1,58 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.soda.proyecto.saborau.controller.SolicitarServicioAlimentacionFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:text="@string/textoPlatoDia"
+            android:textColor="@android:color/background_dark"
+            android:textSize="24dp"
+            android:textStyle="italic" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/texto_blanco"
+            app:srcCompat="@drawable/referencia1"
+            android:layout_below="@+id/textView2"
+            android:onClick="solicitudPlatoDia"
+            android:layout_alignLeft="@+id/imageButton3"
+            android:layout_alignStart="@+id/imageButton3" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageButton2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:text="@string/textoPlatoOpcional"
+            android:textColor="@android:color/background_dark"
+            android:textSize="24dp"
+            android:textStyle="italic" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/texto_blanco"
+            android:onClick="solicitudPlatoOpcional"
+            app:srcCompat="@drawable/referencia2"
+            android:layout_below="@+id/textView3"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+</FrameLayout>

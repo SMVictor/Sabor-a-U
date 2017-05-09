@@ -1,8 +1,10 @@
 package com.soda.proyecto.saborau.controller;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,12 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.soda.proyecto.saborau.R;
+import com.soda.proyecto.saborau.dominio.Pedido;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
+    FragmentManager fragmentManager = getSupportFragmentManager();
     private Intent intent;
 
     @Override
@@ -33,6 +38,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+       // fragmentManager.beginTransaction().replace(R.id.contenedor, new PrincipalFragment()).addToBackStack(null).commit();
     }
 
     @Override
@@ -76,19 +83,39 @@ public class MainActivity extends AppCompatActivity
 
         switch (id){
 
+            case R.id.home:
+                intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                break;
+
             case R.id.almuerzo:
-                //intent = new Intent(this, SolicitarServicioAlimentacionActivity.class);
-                //startActivity(intent);
-                return true;
+                fragmentManager.beginTransaction().replace(R.id.contenedor, new SolicitarServicioAlimentacionFragment()).addToBackStack(null).commit();
+                break;
 
             case R.id.hitorial:
-                //intent = new Intent(this, HistorialActivity.class);
-                //startActivity(intent);
-                return true;
-            default:
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                drawer.closeDrawer(GravityCompat.START);
-                return true;
+                fragmentManager.beginTransaction().replace(R.id.contenedor, new HistorialFragment()).addToBackStack(null).commit();
+                break;
         }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+    public void solicitudPlatoDia(View view){
+        SolicitarServicioPlatoFragment fragment = new SolicitarServicioPlatoFragment();
+
+        fragmentManager.beginTransaction().replace(R.id.contenedor, fragment).addToBackStack(null).commit();
+
+        Bundle data = new Bundle();
+        data.putBoolean("tipoPlatoSeleccionado", false);
+        fragment.setArguments(data);
+    }
+    public void solicitudPlatoOpcional(View view){
+        SolicitarServicioPlatoFragment fragment = new SolicitarServicioPlatoFragment();
+
+        fragmentManager.beginTransaction().replace(R.id.contenedor, fragment).addToBackStack(null).commit();
+
+        Bundle data = new Bundle();
+        data.putBoolean("tipoPlatoSeleccionado", true);
+        fragment.setArguments(data);
     }
 }

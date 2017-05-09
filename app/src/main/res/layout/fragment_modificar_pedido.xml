@@ -1,0 +1,132 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.soda.proyecto.saborau.controller.ModificarPedidoFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/lbTipoPlato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Texto"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_dark"
+            android:textSize="24dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:id="@+id/imagenPlato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/lbTipoPlato"
+            android:layout_marginTop="18dp"
+            android:layout_toEndOf="@+id/lvListaIngredientes"
+            android:layout_toRightOf="@+id/lvListaIngredientes"
+            app:srcCompat="@drawable/referencia1" />
+
+        <ListView
+            android:id="@+id/lvListaIngredientes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/lbPrecio"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/imagenPlato"
+            android:layout_toStartOf="@+id/lbTipoPlato"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <TextView
+            android:id="@+id/lbPrecio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/imagenPlato"
+            android:layout_marginEnd="49dp"
+            android:layout_marginRight="49dp"
+            android:layout_marginTop="16dp"
+            android:text="Texto"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/lbCantidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/lvListaIngredientes"
+            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/textoCantidad"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/lbObservaciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/lbCantidad"
+            android:layout_alignStart="@+id/lbCantidad"
+            android:layout_below="@+id/lbCantidad"
+            android:layout_marginTop="24dp"
+            android:text="@string/textoObservaciones"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/etCantidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lbObservaciones"
+            android:layout_alignLeft="@+id/etObservaciones"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignStart="@+id/etObservaciones"
+            android:ems="10"
+            android:inputType="number"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/etObservaciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/lbObservaciones"
+            android:layout_alignBottom="@+id/lbObservaciones"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/lbObservaciones"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/btnModificarPedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="15dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/textoBtnModificar"
+            android:textColor="@color/texto_blanco"
+            android:textSize="18dp" />
+
+    </RelativeLayout>
+
+</FrameLayout>

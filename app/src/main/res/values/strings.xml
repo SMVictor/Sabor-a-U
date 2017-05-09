@@ -33,9 +33,11 @@
     <string name="title_activity_detalles_pedido">Sabor a U</string>
     <string name="informacionDetallesPedido">Información de los platillos incluidos:</string>
     <string name="detallesPedido">Detalles del pedido:</string>
-    <string name="btnCancelarPedido">Cancelar Pedido</string>
-    <string name="btnModificarPedido">Modificar Pedido</string>
+    <string name="btnCancelarPedido">Cancelar</string>
     <string name="title_activity_modificar_pedido">Sabor a U</string>
     <string name="textoBtnModificar">Modificar</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
