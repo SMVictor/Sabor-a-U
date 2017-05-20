@@ -66,8 +66,19 @@ public class HistorialFragment extends Fragment {
                     pedidos.add(pedido);
                 }
 
-                PedidoAdapter pedidoAdapter = new PedidoAdapter(getActivity().getApplicationContext(), R.layout.row, pedidos);
-                historialListView.setAdapter(pedidoAdapter);
+                if(pedidos.isEmpty()){
+                    Toast.makeText(getActivity(), "Usted no tiene ningún pedido registrado", Toast.LENGTH_SHORT).show();
+                }
+                else{
+
+                    ArrayList<Pedido> pedidosDescendentes = new ArrayList<Pedido>();
+                    for(int i=pedidos.size()-1; i>=0; i--){
+
+                        pedidosDescendentes.add(pedidos.get(i));
+                    }
+                    PedidoAdapter pedidoAdapter = new PedidoAdapter(getActivity().getApplicationContext(), R.layout.row, pedidosDescendentes);
+                    historialListView.setAdapter(pedidoAdapter);
+                }
 
             }
 

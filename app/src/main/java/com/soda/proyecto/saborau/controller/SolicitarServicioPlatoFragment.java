@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,8 +82,6 @@ public class SolicitarServicioPlatoFragment extends Fragment {
             }
         });
 
-        plato = new Plato();
-
         listener = mensajeRef.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -99,6 +98,9 @@ public class SolicitarServicioPlatoFragment extends Fragment {
                     int correspondiente = platoNuevo.getDia().getNumeroDia()*platoNuevo.getSemana().getNumeroSemana();
 
                     if(correspondiente==platoCorrespondiente & platoNuevo.isOpcional()==tipoPlatoSeleccionado){
+
+                        plato = new Plato();
+
                         plato = platoNuevo;
                         if(!plato.isOpcional()){
                             tipoPlato.setText(""+plato.getNombrePlato());
@@ -118,12 +120,17 @@ public class SolicitarServicioPlatoFragment extends Fragment {
                         listaIngredientes.setAdapter(adapter);
                     }
                 }
+                if(plato == null){
+                    Toast.makeText(getActivity(), "No se ha podido contactar con el catálogo de platos", Toast.LENGTH_LONG).show();
+                    platoNoEncontrado(getView());
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
-                Toast.makeText(getActivity(), "No se ha podido contactar con el catálogo de pedidos", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "No se ha podido contactar con el catálogo de platos", Toast.LENGTH_LONG).show();
+                platoNoEncontrado(getView());
             }
         });
 
@@ -166,5 +173,11 @@ public class SolicitarServicioPlatoFragment extends Fragment {
             Toast.makeText(getActivity(), "Cancelalo, en caso de no poder retirarlo. ;)", Toast.LENGTH_LONG).show();
 
         }
+    }
+    public void platoNoEncontrado(View view){
+
+        SolicitarServicioAlimentacionFragment fragment = new SolicitarServicioAlimentacionFragment();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.contenedor, fragment).addToBackStack(null).commit();
     }
 }
