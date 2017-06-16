@@ -2,6 +2,8 @@ package com.soda.proyecto.saborau.controller;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -112,6 +115,10 @@ public class MainActivity extends AppCompatActivity
 
             case R.id.home:
                 fragmentManager.beginTransaction().replace(R.id.contenedor, new PrincipalFragment()).addToBackStack(null).commit();
+                break;
+
+            case R.id.registro:
+                fragmentManager.beginTransaction().replace(R.id.contenedor, new RegistrarFragment()).addToBackStack(null).commit();
                 break;
 
             case R.id.almuerzo:
@@ -284,14 +291,15 @@ public class MainActivity extends AppCompatActivity
                     {
                         View hView = navigationView.getHeaderView(0);
                         TextView tvUserNameHeader = (TextView)hView.findViewById(R.id.tvUserNameHeader);
+                        ImageView ivUserNameHeader = (ImageView) hView.findViewById(R.id.ivUserNameHeader);
 
                         //it is changed the profile photo and username in the navigation bar.
-                        try
-                        {
-                            Glide.with(getApplicationContext()).load(usuarioServicio.getFotoPerfil()).into((ImageView) hView.findViewById(R.id.ivUserNameHeader));
-                        } catch (Exception e)
-                        {
-                            e.printStackTrace();
+                        try {
+                            byte [] encodeByte= Base64.decode(usuarioServicio.getFotoPerfil(),Base64.DEFAULT);
+                            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+                            ivUserNameHeader.setImageBitmap(bitmap);
+                        } catch(Exception e) {
+                            e.getMessage();
                         }
                         tvUserNameHeader.setText(usuarioServicio.getNombre());
 

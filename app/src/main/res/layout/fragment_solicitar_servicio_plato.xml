@@ -71,7 +71,7 @@
             android:layout_marginLeft="14dp"
             android:layout_marginStart="14dp"
             android:layout_marginTop="15dp"
-            android:text="@string/textoCantidad"
+            android:text="@string/texto_cantidad"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18dp" />
 
@@ -83,7 +83,7 @@
             android:layout_alignStart="@+id/lbCantidad"
             android:layout_below="@+id/lbCantidad"
             android:layout_marginTop="24dp"
-            android:text="@string/textoObservaciones"
+            android:text="@string/texto_observaciones"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18dp" />
 
@@ -126,7 +126,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginBottom="15dp"
             android:background="@color/colorPrimary"
-            android:text="@string/textoBtnSolicitud"
+            android:text="@string/texto_boton_solicitud"
             android:textColor="@color/texto_blanco"
             android:textSize="18dp" />
 

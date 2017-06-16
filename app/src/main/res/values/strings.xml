@@ -7,37 +7,46 @@
     <string name="action_settings">Settings</string>
 
     //Textos de la pagina de seleccion
-    <string name="btnAlmuerzos">Almuerzos</string>
-    <string name="btnDesayunos">Desayunos</string>
-    <string name="btnACenas">Cenas</string>
-    <string name="btnIniciarSesion">Iniciar Sesión</string>
-    <string name="btnCerrarSesion">Cerrar Sesión</string>
-    <string name="btnRegistro">Crear una cuenta</string>
-    <string name="btnRecuperarContrasena">¿Olvidó su contraseña?</string>
-    <string name="btnHome">Principal</string>
-    <string name="lbInicio">¿Aún no sabes que comer?</string>
+    <string name="boton_almuerzos">Almuerzos</string>
+    <string name="boton_desayunos">Desayunos</string>
+    <string name="boton_cenas">Cenas</string>
+    <string name="boton_iniciar_sesion">Iniciar Sesión</string>
+    <string name="boton_cerrar_sesion">Cerrar Sesión</string>
+    <string name="boton_registro">Crear una cuenta</string>
+    <string name="boton_recuperar_contrasena">¿Olvidó su contraseña?</string>
+    <string name="boton_home">Principal</string>
+    <string name="label_inicio">¿Aún no sabes que comer?</string>
 
     <string name="title_activity_solicitar_servicio_alimentacion">Sabor a U</string>
 
-    <string name="textoPlatoDia">Plato del día</string>
-    <string name="textoPlatoOpcional">Plato opcional</string>
+    <string name="texto_plato_dia">Plato del día</string>
+    <string name="texto_plato_opcional">Plato opcional</string>
 
     <string name="title_activity_solicitar_servicio_plato_dia">Sabor a U</string>
 
-    <string name="textoObservaciones">Observaciones: </string>
-    <string name="textoCantidad">Cantidad: </string>
+    <string name="texto_observaciones">Observaciones: </string>
+    <string name="texto_cantidad">Cantidad: </string>
 
-    <string name="textoBtnSolicitud">Solicitar</string>
+    <string name="texto_boton_solicitud">Solicitar</string>
     <string name="title_activity_historial">Sabor a U</string>
-    <string name="btnHistorial">Historial de Pedidos</string>
+    <string name="boton_historial">Historial de Pedidos</string>
     <string name="title_activity_detalles_pedido">Sabor a U</string>
-    <string name="informacionDetallesPedido">Información de los platillos incluidos:</string>
-    <string name="detallesPedido">Detalles del pedido:</string>
-    <string name="btnCancelarPedido">Cancelar</string>
+    <string name="informacion_detalles_pedido">Información de los platillos incluidos:</string>
+    <string name="detalles_pedido">Detalles del pedido:</string>
+    <string name="boton_cancelar_pedido">Cancelar</string>
     <string name="title_activity_modificar_pedido">Sabor a U</string>
-    <string name="textoBtnModificar">Modificar</string>
+    <string name="texto_botn_modificar">Modificar</string>
 
-    <string name="textoMenuGeneral">Menú General</string>
+    <string name="text_menu_general">Menú General</string>
+
+    <!-- Datos de usuario -->
+    <string name="nombre_usuario">Nombre</string>
+    <string name="primer_apellido_usuario">Primer Apellido</string>
+    <string name="segundo_apellido_usuario">Segundo Apellido</string>
+    <string name="direccion_correo">Correo</string>
+    <string name="password">Password</string>
+    <string name="confirmar_password">Confirmar Password</string>
+    <string name="texto_boton_registrar">Registrar</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

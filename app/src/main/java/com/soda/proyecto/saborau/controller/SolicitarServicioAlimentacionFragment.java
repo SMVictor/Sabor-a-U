@@ -14,8 +14,6 @@ import com.soda.proyecto.saborau.R;
 
 public class SolicitarServicioAlimentacionFragment extends Fragment {
 
-    private int platoSeleccionado;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -1,0 +1,121 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.soda.proyecto.saborau.controller.RegistrarFragment">
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        app:srcCompat="@drawable/logo" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/tvNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nombre_usuario"
+            android:imeOptions="actionUnspecified"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/tvApellido1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/primer_apellido_usuario"
+            android:imeOptions="actionUnspecified"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/tvApellido2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/segundo_apellido_usuario"
+            android:imeOptions="actionUnspecified"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <AutoCompleteTextView
+            android:id="@+id/tvEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:hint="@string/direccion_correo"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/tvPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:imeActionId="@+id/login"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/tvConfirmarPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/confirmar_password"
+            android:imeActionId="@+id/login"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnLogin"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/texto_boton_registrar"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        android:textStyle="bold|italic" />
+
+</LinearLayout>

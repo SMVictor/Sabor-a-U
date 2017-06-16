@@ -3,24 +3,24 @@
 
     <item
     android:id="@+id/home"
-    android:title="@string/btnHome" />
+    android:title="@string/boton_home" />
 
     <item
         android:id="@+id/hitorial"
-        android:title="@string/btnHistorial" />
+        android:title="@string/boton_historial" />
 
     <item android:title="Tiempos de Comida">
         <menu>
             <item
                 android:id="@+id/desayunos"
-                android:title="@string/btnDesayunos" />
+                android:title="@string/boton_desayunos" />
             <item
                 android:id="@+id/almuerzo"
-                android:title="@string/btnAlmuerzos" />
+                android:title="@string/boton_almuerzos" />
 
             <item
                 android:id="@+id/cena"
-                android:title="@string/btnACenas" />
+                android:title="@string/boton_cenas" />
 
         </menu>
     </item>
@@ -29,14 +29,14 @@
         <menu>
             <item
                 android:id="@+id/iniciarSesion"
-                android:title="@string/btnIniciarSesion" />
+                android:title="@string/boton_iniciar_sesion" />
             <item
                 android:id="@+id/cerrarSesion"
-                android:title="@string/btnCerrarSesion" />
+                android:title="@string/boton_cerrar_sesion" />
 
             <item
                 android:id="@+id/registro"
-                android:title="@string/btnRegistro" />
+                android:title="@string/boton_registro" />
 
         </menu>
     </item>

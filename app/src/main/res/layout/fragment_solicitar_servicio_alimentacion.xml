@@ -16,7 +16,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="35dp"
-            android:text="@string/textoPlatoDia"
+            android:text="@string/texto_plato_dia"
             android:textColor="@android:color/background_dark"
             android:textSize="24dp"
             android:textStyle="italic" />
@@ -39,7 +39,7 @@
             android:layout_below="@+id/imageButton2"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="35dp"
-            android:text="@string/textoPlatoOpcional"
+            android:text="@string/texto_plato_opcional"
             android:textColor="@android:color/background_dark"
             android:textSize="24dp"
             android:textStyle="italic" />
