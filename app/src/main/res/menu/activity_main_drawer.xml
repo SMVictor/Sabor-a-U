@@ -38,10 +38,6 @@
                 android:id="@+id/registro"
                 android:title="@string/btnRegistro" />
 
-            <item
-                android:id="@+id/recuperar"
-                android:title="@string/btnRecuperarContrasena" />
-
         </menu>
     </item>
 

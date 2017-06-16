@@ -1,6 +1,7 @@
 package com.soda.proyecto.saborau.controller;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,12 +39,15 @@ public class HistorialFragment extends Fragment {
     private DatabaseReference ref;
     private DatabaseReference mensajeRef;
     private ValueEventListener listener;
+    private SharedPreferences pref;
+    private ArrayList<Pedido> pedidosDescendentes;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_historial, container, false);
+        pref = getActivity().getApplicationContext().getSharedPreferences("UsuarioActual", 0); // 0 - for private mode
         historialListView = (ListView) view.findViewById(R.id.historialView);
         ref = FirebaseDatabase.getInstance().getReference();
         mensajeRef = ref.child("Pedidos");
@@ -63,15 +68,14 @@ public class HistorialFragment extends Fragment {
                     DataSnapshot data = ite.next();
                     Pedido pedido  = data.getValue(Pedido.class);
                     pedido.setIdPedido(data.getKey());
-                    pedidos.add(pedido);
+                    if(pedido.getUsuario().getCorreo().equals(pref.getString("correoUsuario", null)))
+                    {
+                        pedidos.add(pedido);
+                    }
                 }
 
-                if(pedidos.isEmpty()){
-                    Toast.makeText(getActivity(), "Usted no tiene ningún pedido registrado", Toast.LENGTH_SHORT).show();
-                }
-                else{
-
-                    ArrayList<Pedido> pedidosDescendentes = new ArrayList<Pedido>();
+                if(!pedidos.isEmpty()){
+                    pedidosDescendentes = new ArrayList<Pedido>();
                     for(int i=pedidos.size()-1; i>=0; i--){
 
                         pedidosDescendentes.add(pedidos.get(i));
@@ -123,6 +127,14 @@ public class HistorialFragment extends Fragment {
             totalPedido = (TextView) convertView.findViewById(R.id.totalPedido);
             btnDetallesPedido = (Button) convertView.findViewById(R.id.btnDetallesPedido);
 
+            try
+            {
+                Glide.with(getContext()).load(pedidos.get(position).getItems().get(0).getPlato().getImagenPlato()).into((ImageView) imagenPlatoPedido);
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
             fechaPedido.setText("Fecha del pedido: "+pedidos.get(position).getFechaPedido());
             estadoPedido.setText("Estados del pedido: "+pedidos.get(position).getEstado());
 
@@ -154,7 +166,9 @@ public class HistorialFragment extends Fragment {
         fragmentManager.beginTransaction().replace(R.id.contenedor, fragment).addToBackStack(null).commit();
 
         Bundle data = new Bundle();
-        data.putSerializable("Pedido", pedidos.get(posicion));
+        data.putSerializable("Pedido", pedidosDescendentes.get(posicion));
         fragment.setArguments(data);
+
+        mensajeRef.removeEventListener(listener);
     }
 }

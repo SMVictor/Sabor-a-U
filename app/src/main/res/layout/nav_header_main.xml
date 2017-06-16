@@ -12,17 +12,18 @@
     android:background="@color/colorPrimaryDark">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivUserNameHeader"
         android:layout_width="97dp"
         android:layout_height="83dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@drawable/foto" />
+        app:srcCompat="@drawable/logo" />
 
     <TextView
+        android:id="@+id/tvUserNameHeader"
         android:layout_width="342dp"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Sophía"
+        android:text="Usuario"
         android:textColor="@color/texto_blanco" />
 
 </LinearLayout>

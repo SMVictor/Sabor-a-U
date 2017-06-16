@@ -14,6 +14,15 @@ public class Plato implements Serializable {
 	private Dia dia;
 	private Semana semana;
 	private List<ItemPlatoComponente> items;
+	private String imagenPlato;
+
+	public String getImagenPlato() {
+		return imagenPlato;
+	}
+
+	public void setImagenPlato(String imagenPlato) {
+		this.imagenPlato = imagenPlato;
+	}
 
 	public Plato() {
 

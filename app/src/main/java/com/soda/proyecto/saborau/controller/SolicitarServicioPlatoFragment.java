@@ -2,6 +2,7 @@ package com.soda.proyecto.saborau.controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,10 +13,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,20 +51,22 @@ public class SolicitarServicioPlatoFragment extends Fragment {
     private DatabaseReference mensajeRef;
     private ValueEventListener listener;
     private Button btnSolicitar;
-    private int platoCorrespondiente;
+    private String platoCorrespondiente;
     private EditText inCantidad, inObservaciones;
     private SolicitudPresenter presenter;
+    private SharedPreferences pref;
+    private ImageView ivImagenPlato;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Toast.makeText(getActivity(), "Imágenes de referencia", Toast.LENGTH_SHORT).show();
-
 
         tipoPlatoSeleccionado = getArguments().getBoolean("tipoPlatoSeleccionado");
+        platoCorrespondiente = getArguments().getString("platoCorrespondiente");
 
         View view=inflater.inflate(R.layout.fragment_solicitar_servicio_plato, container, false);
+        pref = getActivity().getApplicationContext().getSharedPreferences("UsuarioActual", 0); // 0 - for private mode
 
         tipoPlato = (TextView) view.findViewById(R.id.lbTipoPlato);
         precio = (TextView) view.findViewById(R.id.lbPrecio);
@@ -73,7 +78,7 @@ public class SolicitarServicioPlatoFragment extends Fragment {
         btnSolicitar = (Button) view.findViewById(R.id.btnSolicitar);
         ref = FirebaseDatabase.getInstance().getReference();
         mensajeRef = ref.child("Platos");
-        platoCorrespondiente = 1;
+        ivImagenPlato = (ImageView) view.findViewById(R.id.ivImagenPlato);
 
         btnSolicitar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,20 +100,20 @@ public class SolicitarServicioPlatoFragment extends Fragment {
                     Plato platoNuevo  = data.getValue(Plato.class);
                     platoNuevo.setIdPlato(data.getKey());
 
-                    int correspondiente = platoNuevo.getDia().getNumeroDia()*platoNuevo.getSemana().getNumeroSemana();
-
-                    if(correspondiente==platoCorrespondiente & platoNuevo.isOpcional()==tipoPlatoSeleccionado){
+                    if(platoNuevo.getIdPlato().equals(platoCorrespondiente)){
 
                         plato = new Plato();
 
                         plato = platoNuevo;
-                        if(!plato.isOpcional()){
-                            tipoPlato.setText(""+plato.getNombrePlato());
+                        tipoPlato.setText(""+plato.getNombrePlato());
+                        precio.setText("Precio: "+plato.getPrecioPlato());
+                        try
+                        {
+                            Glide.with(getContext()).load(plato.getImagenPlato()).into((ImageView) ivImagenPlato);
+                        } catch (Exception e)
+                        {
+                            e.printStackTrace();
                         }
-                        else{
-                            tipoPlato.setText(""+plato.getNombrePlato());
-                        }
-                        precio.setText("Precio: "+plato.getPrecioPlato()+"");
 
                         ArrayList<String> componentes = new ArrayList<String>();
 
@@ -140,6 +145,8 @@ public class SolicitarServicioPlatoFragment extends Fragment {
 
     public void solicitarPedido(Plato plato){
 
+        mensajeRef.removeEventListener(listener);
+
         PedidoData solicitudAlimentacion = new PedidoDataFirebase(getActivity());
         presenter = new SolicitudPresenter(solicitudAlimentacion);
 
@@ -152,9 +159,8 @@ public class SolicitarServicioPlatoFragment extends Fragment {
 
         }
         else{
-            //TODO agregar el usuario cuando ya se tengan
             UsuarioServicio user = new UsuarioServicio();
-            user.setNombreUsuario("user1");
+            user.setCorreo(pref.getString("correoUsuario", null)); // getting String);
 
             Pedido pedido = new Pedido();
             ItemPedido itemPedido = new ItemPedido();
@@ -171,6 +177,10 @@ public class SolicitarServicioPlatoFragment extends Fragment {
 
             Toast.makeText(getActivity(), resultado, Toast.LENGTH_SHORT).show();
             Toast.makeText(getActivity(), "Cancelalo, en caso de no poder retirarlo. ;)", Toast.LENGTH_LONG).show();
+
+            PrincipalFragment fragment = new PrincipalFragment();
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.contenedor, fragment).addToBackStack(null).commit();
 
         }
     }

@@ -1,7 +1,5 @@
 package com.soda.proyecto.saborau.controller;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,24 +8,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.soda.proyecto.saborau.R;
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.soda.proyecto.saborau.R;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -71,7 +58,7 @@ public class ModificarPedidoFragment extends Fragment {
         inCantidad = (EditText) view.findViewById(R.id.etCantidad);
         inObservaciones = (EditText) view.findViewById(R.id.etObservaciones);
         btnModificar = (Button) view.findViewById(R.id.btnModificarPedido);
-        imagenPlato = (ImageView) view.findViewById(R.id.imagenPlato);
+        imagenPlato = (ImageView) view.findViewById(R.id.ivImagenPlato);
         ref = FirebaseDatabase.getInstance().getReference();
         mensajeRef = ref.child("Pedidos");
         pedido = (Pedido) getArguments().getSerializable("Pedido");

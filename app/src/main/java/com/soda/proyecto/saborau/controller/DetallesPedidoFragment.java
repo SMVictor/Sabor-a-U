@@ -58,8 +58,6 @@ public class DetallesPedidoFragment extends Fragment {
     private TextView tvFechaPedido;
     private TextView tvEstadoPedido;
     private Pedido pedido;
-    private DatabaseReference ref;
-    private DatabaseReference mensajeRef;
     private Button btnModificarPedido;
     private Button btnCancelarPedido;
 
@@ -75,8 +73,6 @@ public class DetallesPedidoFragment extends Fragment {
         tvEstadoPedido = (TextView) view.findViewById(R.id.tvEstadoPedido);
         btnCancelarPedido = (Button) view.findViewById(R.id.btnCancelarPedido);
         btnModificarPedido = (Button) view.findViewById(R.id.btnModificarPedido);
-        ref = FirebaseDatabase.getInstance().getReference();
-        mensajeRef = ref.child("Platos");
         pedido = (Pedido) getArguments().getSerializable("Pedido");
 
         btnCancelarPedido.setOnClickListener(new View.OnClickListener() {
@@ -93,40 +89,10 @@ public class DetallesPedidoFragment extends Fragment {
             }
         });
 
-        mensajeRef.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                Iterator<DataSnapshot> ite = dataSnapshot.getChildren().iterator();
-
-                while(ite.hasNext()){
-
-                    DataSnapshot data =ite.next();
-                    Plato plato  = data.getValue(Plato.class);
-                    plato.setIdPlato(data.getKey());
-
-                    for (ItemPedido itemLista:pedido.getItems()) {
-
-                        if(itemLista.getPlato().getIdPlato().equals(plato.getIdPlato())){
-
-                            itemLista.setPlato(plato);
-                        }
-
-                    }
-                }
-                ItemPedidoAdapter itemPedidoAdapteredidoAdapter = new ItemPedidoAdapter(getActivity().getApplicationContext(), R.layout.item_platillo_pedido_row, pedido.getItems());
-                historialListView.setAdapter(itemPedidoAdapteredidoAdapter);
-                tvFechaPedido.setText("Fecha del pedido: "+pedido.getFechaPedido());
-                tvEstadoPedido.setText("Estado del pedido: "+pedido.getEstado());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-                Toast.makeText(getActivity(), "No se ha podido contactar con el catálogo de platos", Toast.LENGTH_LONG).show();
-            }
-        });
+        ItemPedidoAdapter itemPedidoAdapteredidoAdapter = new ItemPedidoAdapter(getActivity().getApplicationContext(), R.layout.item_platillo_pedido_row, pedido.getItems());
+        historialListView.setAdapter(itemPedidoAdapteredidoAdapter);
+        tvFechaPedido.setText("Fecha del pedido: "+pedido.getFechaPedido());
+        tvEstadoPedido.setText("Estado del pedido: "+pedido.getEstado());
 
         return view;
     }

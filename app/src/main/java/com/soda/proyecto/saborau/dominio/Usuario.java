@@ -13,8 +13,16 @@ public abstract class Usuario implements Serializable {
     private String primerApellido;
     private String segundoApellido;
     private String correo;
-    private String nombreUsuario;
     private String contrasena;
+    private String fotoPerfil;
+
+    public String getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
+    }
 
     public String getIdUsuario() {
         return idUsuario;
@@ -34,14 +42,6 @@ public abstract class Usuario implements Serializable {
 
     public void setCorreo(String correo) {
         this.correo = correo;
-    }
-
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
     }
 
     public String getContrasena() {
