@@ -161,6 +161,7 @@ public class SolicitarServicioPlatoFragment extends Fragment {
         else{
             UsuarioServicio user = new UsuarioServicio();
             user.setCorreo(pref.getString("correoUsuario", null)); // getting String);
+            user.setNombre(pref.getString("usuario", null));
 
             Pedido pedido = new Pedido();
             ItemPedido itemPedido = new ItemPedido();

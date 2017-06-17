@@ -1,8 +1,15 @@
 package com.soda.proyecto.saborau.Utilities;
 
+import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.soda.proyecto.saborau.dataAccess.PedidoDataFirebase;
 
 public class MiFirebaseInstanceIdService extends FirebaseInstanceIdService {
 
@@ -12,14 +19,17 @@ public class MiFirebaseInstanceIdService extends FirebaseInstanceIdService {
     public void onTokenRefresh() {
         super.onTokenRefresh();
 
-        String token = FirebaseInstanceId.getInstance().getToken();
+        String stringToken = FirebaseInstanceId.getInstance().getToken();
 
-        Log.d(TAG, "Token: " + token);
+        Firebase.setAndroidContext(getApplicationContext());
+        Firebase ref2 = new Firebase(PedidoDataFirebase.FIREBASE_URL);
 
-        enviarTokenAlServidor(token);
-    }
+        Token token = new Token();
+        token.setToken(stringToken);
 
-    private void enviarTokenAlServidor(String token) {
-        // Enviar token al servidor
+        ref2.child("Tokens").push().setValue(token, new Firebase.CompletionListener() {
+            @Override
+            public void onComplete(FirebaseError firebaseError, Firebase firebase) {}
+        });
     }
 }

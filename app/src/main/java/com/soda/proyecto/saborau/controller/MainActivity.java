@@ -21,12 +21,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.soda.proyecto.saborau.R;
+import com.soda.proyecto.saborau.Utilities.MiFirebaseInstanceIdService;
+import com.soda.proyecto.saborau.dataAccess.PedidoDataFirebase;
 import com.soda.proyecto.saborau.dominio.Control;
 import com.soda.proyecto.saborau.dominio.UsuarioServicio;
 
@@ -170,6 +175,7 @@ public class MainActivity extends AppCompatActivity
                     tvUserNameHeader.setText("Usuario");
                     SharedPreferences.Editor editor = pref.edit();
                     editor.remove("correoUsuario"); // Storing long
+                    editor.remove("usuario");
                     editor.commit(); // commit changes
                     session = false;
                     fragmentManager.beginTransaction().replace(R.id.contenedor, new PrincipalFragment()).addToBackStack(null).commit();
@@ -307,6 +313,8 @@ public class MainActivity extends AppCompatActivity
                         session = true;
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putString("correoUsuario", usuarioServicio.getCorreo()); // Storing long
+                        editor.putString("usuario", usuarioServicio.getNombre()+" "
+                                +usuarioServicio.getPrimerApellido()+" "+usuarioServicio.getSegundoApellido());
                         editor.commit(); // commit changes
                         fragmentManager.popBackStack();
                         Toast.makeText(getApplicationContext(), "Bienvenido "+usuarioServicio.getNombre(), Toast.LENGTH_LONG).show();
