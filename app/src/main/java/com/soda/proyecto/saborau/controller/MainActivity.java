@@ -33,6 +33,7 @@ import com.soda.proyecto.saborau.R;
 import com.soda.proyecto.saborau.Utilities.MiFirebaseInstanceIdService;
 import com.soda.proyecto.saborau.dataAccess.PedidoDataFirebase;
 import com.soda.proyecto.saborau.dominio.Control;
+import com.soda.proyecto.saborau.dominio.Plato;
 import com.soda.proyecto.saborau.dominio.UsuarioServicio;
 
 import java.util.Calendar;
@@ -53,7 +54,10 @@ public class MainActivity extends AppCompatActivity
     private ValueEventListener listener;
     private UsuarioServicio usuarioServicio;
     private SharedPreferences pref;
-    private Control control;
+    private String control;
+    private Plato plato;
+    private int diaCorrespondiente;
+    private int semanaCorrespondiente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -191,68 +195,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void getControl()
-    {
-        if(listener!=null)
-        {
-            mensajeRef.removeEventListener(listener);
-        }
-        mensajeRef = ref.child("control");
-        control = new Control();
-        listener = mensajeRef.addValueEventListener(new ValueEventListener()
-        {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot)
-            {
-                Iterator<DataSnapshot> ite = dataSnapshot.getChildren().iterator();
-
-                while(ite.hasNext())
-                {
-
-                    DataSnapshot data = ite.next();
-                    control = data.getValue(Control.class);
-                    String a = "";
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-                Toast.makeText(getApplicationContext(), "Objeto de control no encontrado", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-    public void solicitudPlatoDia(View view)
-    {
-        if(control==null)
-        {
-            getControl();
-        }
-        else
-            {
-                SolicitarServicioPlatoFragment fragment = new SolicitarServicioPlatoFragment();
-                fragmentManager.beginTransaction().replace(R.id.contenedor, fragment).addToBackStack(null).commit();
-                Bundle data = new Bundle();
-                data.putBoolean("tipoPlatoSeleccionado", false);
-                data.putString("platoCorrespondiente", control.getPlatoPrincipal());
-                fragment.setArguments(data);
-            }
-    }
-    public void solicitudPlatoOpcional(View view)
-    {
-        if(control==null)
-        {
-            getControl();
-        }
-        else
-        {
-            SolicitarServicioPlatoFragment fragment = new SolicitarServicioPlatoFragment();
-            fragmentManager.beginTransaction().replace(R.id.contenedor, fragment).addToBackStack(null).commit();
-            Bundle data = new Bundle();
-            data.putBoolean("tipoPlatoSeleccionado", true);
-            data.putString("platoCorrespondiente", control.getPlatoOpcional());
-            fragment.setArguments(data);
-        }
-    }
     /**
      * This method is responsible for verify that the username and password supplied are congruent
      * with the data stored in the database. Further, it is responsible for set the profil photo and
@@ -343,15 +285,109 @@ public class MainActivity extends AppCompatActivity
         long difd=difms / (1000 * 60 * 60 * 24);
         return difd;
     }
+    public void solicitudPlatoDia(View view)
+    {
+        calcularPlatoCorrespondiente();
+        if(listener!=null)
+        {
+            mensajeRef.removeEventListener(listener);
+        }
+        mensajeRef = ref.child("Platos");
+        listener = mensajeRef.addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                Iterator<DataSnapshot> ite = dataSnapshot.getChildren().iterator();
+
+                while(ite.hasNext())
+                {
+
+                    DataSnapshot data = ite.next();
+                    Plato platoLista= data.getValue(Plato.class);
+                    platoLista.setIdPlato(data.getKey());
+
+                    if(platoLista.getSemana().getNumeroSemana()==semanaCorrespondiente &&
+                            platoLista.getDia().getNumeroDia()==diaCorrespondiente)
+                    {
+                        plato=platoLista;
+                    }
+                }
+                if(plato!=null)
+                {
+                    SolicitarServicioPlatoFragment fragment = new SolicitarServicioPlatoFragment();
+                    fragmentManager.beginTransaction().replace(R.id.contenedor, fragment).addToBackStack(null).commit();
+                    Bundle data = new Bundle();
+                    data.putBoolean("tipoPlatoSeleccionado", false);
+                    data.putString("platoCorrespondiente", plato.getIdPlato());
+                    fragment.setArguments(data);
+                } else{
+
+                    Toast.makeText(getApplicationContext(), "El menú no está disponible", Toast.LENGTH_LONG).show();
+                }
+                mensajeRef.removeEventListener(listener);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                Toast.makeText(getApplicationContext(), "Objeto de control no encontrado", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    public void solicitudPlatoOpcional(View view)
+    {
+        calcularPlatoCorrespondiente();
+        if(diaCorrespondiente!=6 && diaCorrespondiente!=7)
+        {
+            if(listener!=null)
+            {
+                mensajeRef.removeEventListener(listener);
+            }
+            mensajeRef = ref.child("control");
+            listener = mensajeRef.addValueEventListener(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    Iterator<DataSnapshot> ite = dataSnapshot.getChildren().iterator();
+
+                    while(ite.hasNext())
+                    {
+
+                        DataSnapshot data = ite.next();
+                        control = data.getValue(String.class);
+                    }
+                    if(control!=null)
+                    {
+                        SolicitarServicioPlatoFragment fragment = new SolicitarServicioPlatoFragment();
+                        fragmentManager.beginTransaction().replace(R.id.contenedor, fragment).addToBackStack(null).commit();
+                        Bundle data = new Bundle();
+                        data.putBoolean("tipoPlatoSeleccionado", true);
+                        data.putString("platoCorrespondiente", control);
+                        fragment.setArguments(data);
+                    } else{
+
+                        Toast.makeText(getApplicationContext(), "El menú no está disponible", Toast.LENGTH_LONG).show();
+                    }
+                    mensajeRef.removeEventListener(listener);
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                    Toast.makeText(getApplicationContext(), "Objeto de control no encontrado", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "El menú no está disponible", Toast.LENGTH_LONG).show();
+        }
+    }
     public void calcularPlatoCorrespondiente()
     {
         Calendar calendar2 = Calendar.getInstance();
-        Calendar calendar1 = new GregorianCalendar(2017,5,12);
+        Calendar calendar1 = new GregorianCalendar(2017,5,19);
 
         long diasTrascurridos = difDiasEntre2fechas(calendar1, calendar2);
-
-        int diaCorrespondiente = 0;
-        int semanaCorrespondiente = 0;
 
         diaCorrespondiente = (int) (diasTrascurridos%7)+1;
         semanaCorrespondiente = (int) ((diasTrascurridos/7)%3)+1;
