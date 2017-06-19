@@ -6,16 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.soda.proyecto.saborau.controller.LoginFragment">
 
-    <TextView
-        android:id="@+id/tvLogo"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:textAlignment="center"
-        android:textSize="30dp"
-        android:text="Usuarios Registrados"/>
+        android:adjustViewBounds="true"
+        android:maxHeight="150dp"
+        android:maxWidth="150dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/logo" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -32,6 +31,7 @@
             android:singleLine="true" />
 
     </android.support.design.widget.TextInputLayout>
+
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
