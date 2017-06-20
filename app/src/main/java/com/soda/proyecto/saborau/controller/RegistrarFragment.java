@@ -1,8 +1,10 @@
 package com.soda.proyecto.saborau.controller;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -34,8 +36,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.soda.proyecto.saborau.Modules.VolleyS;
 import com.soda.proyecto.saborau.R;
+import com.soda.proyecto.saborau.dataAccess.PedidoData;
 import com.soda.proyecto.saborau.dataAccess.PedidoDataFirebase;
 import com.soda.proyecto.saborau.dominio.UsuarioServicio;
+import com.soda.proyecto.saborau.presenter.SolicitudPresenter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -101,55 +105,83 @@ public class RegistrarFragment extends Fragment
             usuarioServicio.setCorreo(correo.getText()+"");
             usuarioServicio.setContrasena(password.getText()+"");
 
-            try
-            {
-                Toast.makeText(getActivity(), "Seleccione una foto de perfil", Toast.LENGTH_SHORT).show();
-                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                startActivityForResult(gallery, PICK_IMAGE);
-            }catch (ActivityNotFoundException ex){}
-        }
-        else
-            {
+            AlertDialog.Builder mensajeConfirmacion = new AlertDialog.Builder(getContext());
+            mensajeConfirmacion.setTitle("Importante");
+            mensajeConfirmacion.setMessage("¿Desea agregar una foto de perfil?");
+            mensajeConfirmacion.setCancelable(false);
+            mensajeConfirmacion.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    Bitmap foto = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+                    ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+                    foto.compress(Bitmap.CompressFormat.PNG,100, baos);
+                    byte [] b=baos.toByteArray();
+                    String temp=Base64.encodeToString(b, Base64.DEFAULT);
+
+                    usuarioServicio.setFotoPerfil(temp);
+                    guardarUsuario();
+                }
+            });
+            mensajeConfirmacion.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    try
+                    {
+                        Toast.makeText(getActivity(), "Seleccione una foto de perfil", Toast.LENGTH_SHORT).show();
+                        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                        startActivityForResult(gallery, PICK_IMAGE);
+
+                    }catch (ActivityNotFoundException ex){}
+
+                }
+            });
+
+            mensajeConfirmacion.show();
+        } else {
                 Toast.makeText(getActivity(), "Las contraseñas suministradas no coinciden", Toast.LENGTH_SHORT).show();
-            }
+        }
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE){
+        if(resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE)
+        {
             Uri uriImagen = data.getData();
             Bitmap foto = BitmapFactory.decodeFile(obtenerPathReal(uriImagen));
-
             ByteArrayOutputStream baos=new  ByteArrayOutputStream();
             foto.compress(Bitmap.CompressFormat.PNG,100, baos);
             byte [] b=baos.toByteArray();
             String temp=Base64.encodeToString(b, Base64.DEFAULT);
 
             usuarioServicio.setFotoPerfil(temp);
-
-            Firebase.setAndroidContext(getActivity());
-            Firebase ref = new Firebase(PedidoDataFirebase.FIREBASE_URL);
-
-            Toast.makeText(getActivity(), "Procesando Solicitud...", Toast.LENGTH_SHORT).show();
-
-            ref.child("UsuarioServicio").push().setValue(usuarioServicio, new Firebase.CompletionListener() {
-                @Override
-                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
-                    if (firebaseError == null)
-                    {
-                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                        fragmentManager.popBackStack();
-                        Toast.makeText(getActivity(), "Registro Exitoso!!!!, Procesa a Iniciar Sesión", Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                        {
-                            Toast.makeText(getActivity(), "Su solicitud no pudo ser realizada", Toast.LENGTH_SHORT).show();
-                        }
-                }
-
-            });
+            guardarUsuario();
         }
+    }
+    public void guardarUsuario()
+    {
+        Firebase.setAndroidContext(getActivity());
+        Firebase ref = new Firebase(PedidoDataFirebase.FIREBASE_URL);
+
+        Toast.makeText(getActivity(), "Procesando Solicitud...", Toast.LENGTH_SHORT).show();
+
+        ref.child("UsuarioServicio").push().setValue(usuarioServicio, new Firebase.CompletionListener() {
+            @Override
+            public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                if (firebaseError == null)
+                {
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.contenedor, new LoginFragment()).addToBackStack(null).commit();
+                    Toast.makeText(getActivity(), "Registro Exitoso!!!!, Procesa a Iniciar Sesión", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(getActivity(), "Su solicitud no pudo ser realizada", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
     }
     public String obtenerPathReal(Uri uri)
     {

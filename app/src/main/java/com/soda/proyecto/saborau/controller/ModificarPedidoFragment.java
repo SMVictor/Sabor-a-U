@@ -45,8 +45,6 @@ public class ModificarPedidoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Toast.makeText(getActivity(), "Imágenes de referencia", Toast.LENGTH_SHORT).show();
-
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_modificar_pedido, container, false);
 

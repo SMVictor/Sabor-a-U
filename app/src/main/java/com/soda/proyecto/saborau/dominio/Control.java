@@ -8,20 +8,10 @@ import java.io.Serializable;
 
 public class Control implements Serializable
 {
-    private int dia;
     private String platoOpcional;
-    private String platoPrincipal;
-    private int Semana;
 
     public Control() {}
 
-    public int getDia() {
-        return dia;
-    }
-
-    public void setDia(int dia) {
-        this.dia = dia;
-    }
 
     public String getPlatoOpcional() {
         return platoOpcional;
@@ -29,21 +19,5 @@ public class Control implements Serializable
 
     public void setPlatoOpcional(String platoOpcional) {
         this.platoOpcional = platoOpcional;
-    }
-
-    public String getPlatoPrincipal() {
-        return platoPrincipal;
-    }
-
-    public void setPlatoPrincipal(String platoPrincipal) {
-        this.platoPrincipal = platoPrincipal;
-    }
-
-    public int getSemana() {
-        return Semana;
-    }
-
-    public void setSemana(int semana) {
-        Semana = semana;
     }
 }

@@ -258,7 +258,7 @@ public class MainActivity extends AppCompatActivity
                         editor.putString("usuario", usuarioServicio.getNombre()+" "
                                 +usuarioServicio.getPrimerApellido()+" "+usuarioServicio.getSegundoApellido());
                         editor.commit(); // commit changes
-                        fragmentManager.popBackStack();
+                        fragmentManager.beginTransaction().replace(R.id.contenedor, new PrincipalFragment()).addToBackStack(null).commit();
                         Toast.makeText(getApplicationContext(), "Bienvenido "+usuarioServicio.getNombre(), Toast.LENGTH_LONG).show();
 
                     }
@@ -385,7 +385,7 @@ public class MainActivity extends AppCompatActivity
     public void calcularPlatoCorrespondiente()
     {
         Calendar calendar2 = Calendar.getInstance();
-        Calendar calendar1 = new GregorianCalendar(2017,5,19);
+        Calendar calendar1 = new GregorianCalendar(2017,5,20);
 
         long diasTrascurridos = difDiasEntre2fechas(calendar1, calendar2);
 
