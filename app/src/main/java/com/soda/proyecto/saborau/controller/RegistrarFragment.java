@@ -46,6 +46,7 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 public class RegistrarFragment extends Fragment
 {
@@ -148,15 +149,22 @@ public class RegistrarFragment extends Fragment
 
         if(resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE)
         {
-            Uri uriImagen = data.getData();
-            Bitmap foto = BitmapFactory.decodeFile(obtenerPathReal(uriImagen));
-            ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-            foto.compress(Bitmap.CompressFormat.PNG,100, baos);
-            byte [] b=baos.toByteArray();
-            String temp=Base64.encodeToString(b, Base64.DEFAULT);
+            try
+            {
+                Uri uriImagen = data.getData();
+                Bitmap foto = BitmapFactory.decodeFile(obtenerPathReal(uriImagen));
+                ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+                foto.compress(Bitmap.CompressFormat.PNG,100, baos);
+                byte [] b=baos.toByteArray();
+                baos.close();
+                String temp=Base64.encodeToString(b, Base64.DEFAULT);
 
-            usuarioServicio.setFotoPerfil(temp);
-            guardarUsuario();
+                usuarioServicio.setFotoPerfil(temp);
+                guardarUsuario();
+
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
     public void guardarUsuario()

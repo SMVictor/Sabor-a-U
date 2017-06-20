@@ -271,6 +271,7 @@ public class MainActivity extends AppCompatActivity
                 {
                     Toast.makeText(getApplicationContext(), "Correo electrónico no encontrado", Toast.LENGTH_LONG).show();
                 }
+                mensajeRef.removeEventListener(listener);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

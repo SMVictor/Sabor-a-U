@@ -65,16 +65,12 @@ public class PrincipalFragment extends Fragment
 
                 if(platos.isEmpty()){
                     Toast.makeText(getActivity(), "No se ha registrado ningún plato", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else{
 
                     PlatoAdapter platoAdapter = new PlatoAdapter(getActivity().getApplicationContext(), R.layout.dia_menu, platos);
                     lvMenu.setAdapter(platoAdapter);
-
                 }
-
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 

@@ -43,6 +43,12 @@ public class HistorialFragment extends Fragment {
     private ArrayList<Pedido> pedidosDescendentes;
 
     @Override
+    public void onStop() {
+        super.onStop();
+        mensajeRef.removeEventListener(listener);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -82,8 +88,9 @@ public class HistorialFragment extends Fragment {
                     }
                     PedidoAdapter pedidoAdapter = new PedidoAdapter(getActivity().getApplicationContext(), R.layout.row, pedidosDescendentes);
                     historialListView.setAdapter(pedidoAdapter);
+                }else{
+                    Toast.makeText(getActivity(), "No tienes pedidos registrados", Toast.LENGTH_LONG).show();
                 }
-
             }
 
             @Override

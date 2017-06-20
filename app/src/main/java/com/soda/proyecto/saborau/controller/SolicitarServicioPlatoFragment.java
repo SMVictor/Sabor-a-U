@@ -185,6 +185,13 @@ public class SolicitarServicioPlatoFragment extends Fragment {
 
         }
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mensajeRef.removeEventListener(listener);
+    }
+
     public void platoNoEncontrado(View view){
 
         SolicitarServicioAlimentacionFragment fragment = new SolicitarServicioAlimentacionFragment();
